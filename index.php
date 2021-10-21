@@ -24,42 +24,74 @@
 
 <?php
 
+$powerOn = null;
+
+if(isset($_GET["powerOn"])){
+    $powerOn = true;
+    $pokeData = null;
+    $pokeSpecies = null;
+    $evoChain = null;
+    $showMoves = null;
+    $evolutionArray = null;
+    $error = false;
+}
+if(isset($_GET["powerOff"])){
+    $powerOn = false;
+}
+
 $pokeData = null;
 $pokeSpecies = null;
 $evoChain = null;
 $showMoves = null;
 $evolutionArray = null;
+$error = false;
 const API_URL = 'https://pokeapi.co/api/v2';
 const MAX_POKE = 10290;
 
 if (isset($_GET["php--search"]))
 {
+    $powerOn = true;
     $input = ($_GET["php--search"]);
+    $input = strtolower($input);
+        if (str_ends_with($input, 'mime')){
+            $input = 'mr-mime';
+        }
+        if (str_ends_with($input, 'rime')){
+            $input = 'mr-rime';
+        }
+        if (str_starts_with($input, 'mime')){
+            $input = 'mime-jr';
+        }
     $idInput = (int)$input;
     if ($idInput != null)
     {
         $input = max(1, min($idInput, MAX_POKE));
     }
     $pokeData = Pokemon::fetchPokemon($input);
-    $name = $pokeData->name;
-    if ($name!= null) {
+    if($pokeData->name != '') {
         $pokeSpecies = pokeSpecies::getSpecies($input);
         $evoChain = evolutionChain::getEvos($input);
     } else {
+        $pokeData = null;
         $pokeSpecies = null;
         $evoChain = null;
+        $error = true;
     }
 }
 
 if (isset($_GET['random'])){
+    $powerOn = true;
     $input = rand(1, 898);
 
     $pokeData = Pokemon::fetchPokemon($input);
-    if ($pokeData->name != null){
+    if($pokeData != null) {
         $pokeSpecies = pokeSpecies::getSpecies($input);
         $evoChain = evolutionChain::getEvos($input);
+    } else {
+        $pokeData = null;
+        $pokeSpecies = null;
+        $evoChain = null;
     }
-
 }
 
 class Pokemon
@@ -88,19 +120,12 @@ class Pokemon
     static function fetchPokemon($input): Pokemon
     {
         $pokedata = file_get_contents(API_URL . '/pokemon/' . $input);
-        if($pokedata!=null){
+        if ($pokedata!=null){
             $pokedata = json_decode($pokedata, true);
+            return new Pokemon($pokedata['name'], $pokedata['id'], $pokedata['moves'], $pokedata['sprites'], $pokedata['height'], $pokedata['weight'], $pokedata['types'], $pokedata['species']['url']);
         } else {
-            $pokedata['name'] = null;
-            $pokedata['id'] = '';
-            $pokedata['moves'] = [];
-            $pokedata['sprites'] = [];
-            $pokedata['height'] = 0;
-            $pokedata['weight'] = 0;
-            $pokedata['types'] = [];
-            $pokedata['species']['url'] = '';
+            return new Pokemon();
         }
-        return new Pokemon($pokedata['name'], $pokedata['id'], $pokedata['moves'], $pokedata['sprites'], $pokedata['height'], $pokedata['weight'], $pokedata['types'], $pokedata['species']['url']);
 
     }
 }
@@ -152,41 +177,33 @@ class evolutionChain
                 $evo1Sprite = $evo1Data['sprites']['front_default'];
                 $evo1 = [$evo1Name, $evo1Sprite];
                 array_push($evolutions, $evo1);
-                if(count($evoChain['evolves_to'])==1){
-                    $evo2Name = $evoChain['evolves_to'][0]['species']['name'];
-                    $evo2Data = file_get_contents(API_URL . '/pokemon/' . $evo2Name);
-                    $evo2Data = json_decode($evo2Data, true);
-                    $evo2Sprite = $evo2Data['sprites']['front_default'];
-                    $evo2 = [$evo2Name, $evo2Sprite];
-                    array_push($evolutions, $evo2);
-                    if(count($evoChain['evolves_to'][0]['evolves_to'])==1){
-                        $evo3Name = $evoChain['evolves_to'][0]['evolves_to'][0]['species']['name'];
-                        $evo3Data = file_get_contents(API_URL . '/pokemon/' . $evo3Name);
-                        $evo3Data = json_decode($evo3Data, true);
-                        $evo3Sprite = $evo3Data['sprites']['front_default'];
-                        $evo3 = [$evo3Name, $evo3Sprite];
-                        array_push($evolutions, $evo3);
-                    }
-                } elseif (count($evoChain['evolves_to'])>1){
-                    foreach($evoChain['evolves_to'] as $evo){
-                        $evoName = $evo['species']['name'];
-                        $evoData = file_get_contents(API_URL . '/pokemon/' . $evoName);
-                        if ($evoData == null) {
-                            $evoName = $pokeData->name;
-                            $evoData = file_get_contents(API_URL . '/pokemon/' . $evoName);
+                if(count($evoChain['evolves_to'])>=1){
+                    foreach ($evoChain['evolves_to'] as $evo){
+                        $evo2Name = $evo['species']['name'];
+                        $evo2Data = file_get_contents(API_URL . '/pokemon/' . $evo2Name);
+                        if ($evo2Data == null){
+                            $evo2species = $evo['species']['url'];
+                            $evo2ID = substr($evo2species, -4, 3);
+                            $evo2Data = file_get_contents(API_URL . '/pokemon/' . $evo2ID);
                         }
-                        $evoData = json_decode($evoData, true);
-                        $evoSprite = $evoData['sprites']['front_default'];
-                        $evo = [$evoName, $evoSprite];
-                        array_push($evolutions, $evo);
-
+                        $evo2Data = json_decode($evo2Data, true);
+                        $evo2Sprite = $evo2Data['sprites']['front_default'];
+                        $evo2 = [$evo2Name, $evo2Sprite];
+                        array_push($evolutions, $evo2);
+                        if(count($evo['evolves_to'])>0){
+                            foreach($evo['evolves_to'] as $evo2){
+                                $evo3Name = $evo2['species']['name'];
+                                $evo3Data = file_get_contents(API_URL . '/pokemon/' . $evo3Name);
+                                $evo3Data = json_decode($evo3Data, true);
+                                $evo3Sprite = $evo3Data['sprites']['front_default'];
+                                $evo3 = [$evo3Name, $evo3Sprite];
+                                array_push($evolutions, $evo3);
+                            }
+                        }
                     }
                 }
             }
-
         }
-
-
         return new evolutionChain($evolutions);
     }
 
@@ -196,16 +213,29 @@ class evolutionChain
 
 <div class="pokedex">
     <div class="left">
-        <div class="logo"></div>
+        <div class="<?php
+        if ($powerOn==false){
+            echo 'logoOff';
+        } else {
+            echo 'logo';
+        }
+        ?>"></div>
         <div class="bg_curve1_left"></div>
         <div id="bg_curve2_left"></div>
         <div class="curve1_left">
-            <a id="powerButton" class="powerButtonOn">
-                <div id="reflect"> </div>
-            </a>
-            <div id="redLight" class="redLightOn"></div>
-            <div id="yellowLight" class="yellowLightOn"></div>
-            <div id="greenLight" class="greenLightOn"></div>
+            <?php
+            if($powerOn != true){
+                echo '<a href="index.php?powerOn" id="powerButton" class="powerButtonOff"><div id="reflect"></div></a>
+                    <div id="redLight" class="powerButtonOff"></div>
+                    <div id="yellowLight" class="powerButtonOff"></div>
+                    <div id="greenLight" class="powerButtonOff"></div>';
+            } else {
+                echo '<a href="index.php?powerOff" id="powerButton" class="powerButtonOn"><div id="reflect"></div></a>
+                    <div id="redLight" class="redLightOn"></div>
+                    <div id="yellowLight" class="yellowLightOn"></div>
+                    <div id="greenLight" class="greenLightOn"></div>';
+            }
+            ?>
         </div>
         <div id="curve2_left">
             <div id="junction">
@@ -213,7 +243,15 @@ class evolutionChain
                 <div id="junction2"></div>
             </div>
         </div>
-        <div class="screen">
+        <div class="
+        <?php
+        if ($powerOn!=true){
+            echo 'screenOff';
+        } else {
+            echo 'screen';
+        }
+        ?>
+        ">
             <div id="topPicture">
                 <div id="buttontopPicture1"></div>
                 <div id="buttontopPicture2"></div>
@@ -221,19 +259,19 @@ class evolutionChain
             <div id="picture">
                 <img id="js--pokeImage" alt="pokemon" height="170" src="<?php
                 if ($pokeData->id != 0){
-                    if ($pokeData->name != null){
                         echo $pokeData->sprites['other']['official-artwork']['front_default'];
+                } else {
+                    if($error != true){
+                        echo 'IMG/oak.gif';
                     } else {
-                        echo 'IMG/error.png';
+                        echo ' IMG/error.png';
                     }
 
-                } else {
-                    echo 'IMG/oak.gif';
                 }
                  ?>" />
             </div>
             <?php
-            if($pokeData->id != 0 &&$pokeData->name != null){
+            if($pokeData->id != 0){
                 echo' <div id="js--pokeID">' . $pokeData->id . '</div>';
             }
             ?>
@@ -244,14 +282,40 @@ class evolutionChain
                 <div class="sp"></div>
             </div>
         </div>
-            <a href="index.php?random=true" id="js--randomPokemon" class="randomPokemon">
-                <img id="random" src="IMG/random.png" alt="random pokemon">
-            </a>
+        <a href="index.php?random=true" id="js--randomPokemon" class="
+        <?php
+        if ($powerOn!=true){
+            echo 'randomPokemonOff';
+        } else {
+            echo 'randomPokemon';
+        }
+        ?>
+        ">
+            <img id="random" src="IMG/random.png" alt="random pokemon">
+        </a>
 
 
-        <div class="barbutton1"></div>
-        <div class="barbutton2"></div>
-        <div class="cross">
+        <div class=" <?php
+        if ($powerOn!=true){
+            echo 'barbutton1Off';
+        } else {
+            echo 'barbutton1';
+        }
+        ?>"></div>
+        <div class="<?php
+        if ($powerOn!=true){
+            echo 'barbutton2Off';
+        } else {
+            echo 'barbutton2';
+        }
+        ?>"></div>
+        <div class="<?php
+        if ($powerOn!=true){
+            echo 'crossOff';
+        } else {
+            echo 'cross';
+        }
+        ?>">
             <div id="leftcross">
                 <div id="leftT"></div>
             </div>
@@ -269,7 +333,13 @@ class evolutionChain
             </div>
         </div>
     </div>
-    <div class="right">
+    <div class="<?php
+    if ($powerOn!=true){
+        echo 'rightOff';
+    } else {
+        echo 'right';
+    }
+    ?>">
         <div id="stats">
             <div id="base-stats">
                 <div id="stats-left">
@@ -345,14 +415,22 @@ class evolutionChain
                             }
                         }
                     } else{
+                        $evoArray = [];
+                        $evoArray[0] = $evoChain->evolutions[0];
+                        $evoArray2 = $evoChain->evolutions;
+                        array_shift($evoArray2);
+                        shuffle($evoArray2);
+                        foreach($evoArray2 as $e2){
+                            array_push($evoArray, $e2);
+                        }
                         echo '<div class="js--pokeSpriteTooltip evolution evolutionOn tooltip" title="">
                         <img src="' . $evoArray[0][1] . '" alt="sprite1"  class="js--pokeSprite">
                         <span class="tooltiptext">' . $evoArray[0][0] . '</span>
                         </div>';
                         for ($i=1;$i<6;$i++){
                             echo '<div class="js--pokeSpriteTooltip evolution evolutionOn tooltip" title="">
-                            <img src="' . $evoArray[rand(1, count($evoArray))][1] . '" alt="sprite1"  class="js--pokeSprite">
-                            <span class="tooltiptext">' . $evoArray[rand(1, count($evoArray))][0] . '</span>
+                            <img src="' . $evoArray[$i][1] . '" alt="sprite1"  class="js--pokeSprite">
+                            <span class="tooltiptext">' . $evoArray[$i][0] . '</span>
                             </div>';
                         }
                     }
