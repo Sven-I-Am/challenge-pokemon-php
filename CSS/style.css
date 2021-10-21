@@ -1,0 +1,1243 @@
+#test {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200px;
+    background-color: #05fbfb;
+}
+
+/*------*/
+/*SETUP*/
+/*-----*/
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Orbitron', sans-serif;
+}
+
+body {
+    background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(../IMG/background.png);
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    background-attachment: fixed;
+}
+
+/*------------------------------------*/
+/*POKEDEX OVERALL SIZE AND POSITIONING*/
+/*------------------------------------*/
+
+    .pokedex {
+        width: 750px;
+        margin: 50px auto 0 auto;
+    }
+
+    .left {
+        width: 400px;
+        height: 500px;
+        float: left;
+        position: relative;
+        z-index: 1;
+    }
+
+    .right {
+        width: 350px;
+        height: 500px;
+        float: left;
+        position: relative;
+    }
+
+/*---------*/
+/*LEFT FLAP*/
+/*---------*/
+
+    .curve1_left {
+        width: 201px;
+        height: 85px;
+        background-color: #8b0000;
+        float: left;
+        padding: 15px 0 0 15px;
+
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        box-shadow: -10px 9px #5e0000;
+        -webkit-box-shadow: -10px 9px #5e0000;
+        -moz-box-shadow: -10px 9px #5e0000;
+        -o-box-shadow: -10px 9px #5e0000;
+
+        border-bottom-right-radius: 85px 60px;
+        -webkit-border-bottom-right-radius: 85px 60px;
+        -moz-border-bottom-right-radius: 85px 60px;
+        -o-border-bottom-right-radius: 85px 60px;
+
+        border-top-left-radius: 30px;
+        -webkit-border-top-left-radius: 30px;
+        -moz-border-top-left-radius: 30px;
+        -o-border-top-left-radius: 30px;
+    }
+
+
+    .bg_curve1_left {
+        width: 400px;
+        height: 80px;
+        background-color: #8b0000;
+
+        border-top-left-radius: 30px;
+        -webkit-border-top-left-radius: 30px;
+        -moz-border-top-left-radius: 30px;
+        -o-border-top-left-radius: 30px;
+    }
+
+    #curve2_left {
+        width: 216px;
+        height: 451px;
+        background-color: #c00d0d;
+        float: right;
+
+        position: absolute;
+        bottom: 0;
+        right: 0;
+
+        border-top-left-radius:85px 60px;
+        -webkit-border-top-left-radius: 85px 60px;
+        -moz-border-top-left-radius: 85px 60px;
+        -o-border-top-left-radius: 85px 60px;
+    }
+
+    #bg_curve2_left {
+        width: 400px;
+        height: 420px;
+        background-color: #c00d0d;
+
+        box-shadow: -10px 9px #5e0000;
+        -webkit-box-shadow: -10px 9px #5e0000;
+        -moz-box-shadow: -10px 9px #5e0000;
+        -o-box-shadow: -10px 9px #5e0000;
+
+        border-bottom-left-radius: 30px;
+        -webkit-border-bottom-left-radius: 30px;
+        -moz-border-bottom-left-radius: 30px;
+        -o-border-bottom-left-radius: 30px;
+    }
+
+/*---------------------*/
+/*ELEMENTS ON LEFT FLAP*/
+/*---------------------*/
+
+    #powerButton {
+        width: 60px;
+        height: 60px;
+        margin-right: 15px;
+        border: 5px solid #fff;
+        float: left;
+
+        box-shadow: 0 0 10px #490000;
+        -webkit-box-shadow: 0 0 10px #490000;
+        -moz-box-shadow: 0 0 10px #490000;
+        -o-box-shadow: 0 0 10px #490000;
+
+        border-radius: 35px;
+        -webkit-border-radius: 35px;
+        -moz-border-radius: 35px;
+        -o-border-radius: 35px;
+    }
+
+    .powerButtonOn {
+        background: radial-gradient(#05fbfb, #29abe3);
+        background: -webkit-radial-gradient(#05fbfb, #29abe3);
+        background: -moz-radial-gradient(#05fbfb, #29abe3);
+        background: -o-radial-gradient(#05fbfb, #29abe3);
+    }
+
+    .powerButtonOff {
+        background: radial-gradient(#232525, #072b46);
+        background: -webkit-radial-gradient(#232525, #072b46);
+        background: -moz-radial-gradient(#232525, #072b46);
+        background: -o-radial-gradient(#232525, #072b46);
+    }
+
+    #reflect {
+        width: 30px;
+        height: 18px;
+        margin: 3px 0 0 15px;
+        background: #fff;
+        opacity: 0.6;
+
+        border-radius: 15px 9px;
+        -webkit-border-radius: 15px 9px;
+        -moz-border-radius: 15px 9px;
+        -o-border-radius: 15px 9px;
+    }
+
+    #redLight {
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+        float: left;
+
+        box-shadow: 0 0 10px #490000;
+        -webkit-box-shadow: 0 0 10px #490000;
+        -moz-box-shadow: 0 0 10px #490000;
+        -o-box-shadow: 0 0 10px #490000;
+
+        border-radius: 20px;
+        -webkit-border-radius: 20px;
+        -moz-border-radius: 20px;
+        -o-border-radius: 20px;
+    }
+
+    .redLightOn {
+        background: radial-gradient(#fb7b7b, #fb0505);
+        background: -webkit-radial-gradient(#fb7b7b, #fb0505);
+        background: -moz-radial-gradient(#fb7b7b, #fb0505);
+        background: -o-radial-gradient(#fb7b7b, #fb0505);
+    }
+
+    #yellowLight {
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+        float: left;
+
+        box-shadow: 0 0 10px #490000;
+        -webkit-box-shadow: 0 0 10px #490000;
+        -moz-box-shadow: 0 0 10px #490000;
+        -o-box-shadow: 0 0 10px #490000;
+
+        border-radius: 20px;
+        -webkit-border-radius: 20px;
+        -moz-border-radius: 20px;
+        -o-border-radius: 20px;
+    }
+
+    .yellowLightOn {
+        background: radial-gradient(#fbfb9b, #fbfb05);
+        background: -webkit-radial-gradient(#fbfb9b, #fbfb05);
+        background: -moz-radial-gradient(#fbfb9b, #fbfb05);
+        background: -o-radial-gradient(#fbfb9b, #fbfb05);
+    }
+
+    #greenLight {
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+        float: left;
+
+        box-shadow: 0 0 10px #490000;
+        -webkit-box-shadow: 0 0 10px #490000;
+        -moz-box-shadow: 0 0 10px #490000;
+        -o-box-shadow: 0 0 10px #490000;
+
+        border-radius: 20px;
+        -webkit-border-radius: 20px;
+        -moz-border-radius: 20px;
+        -o-border-radius: 20px;
+    }
+
+    .greenLightOn {
+        background: radial-gradient(#b0fb7b, #50fb05);
+        background: -webkit-radial-gradient(#b0fb7b, #50fb05);
+        background: -moz-radial-gradient(#b0fb7b, #50fb05);
+        background: -o-radial-gradient(#b0fb7b, #50fb05);
+    }
+
+    #junction {
+        width: 60px;
+        height: 451px;
+        float: right;
+
+        background: linear-gradient(left, #8b0000 0%, #c00d0d 50%, #8b0000 100%);
+        background: -webkit-linear-gradient(left, #8b0000 0%, #c00d0d 50%, #8b0000 100%);
+        background: -moz-linear-gradient(left, #8b0000 0%, #c00d0d 50%, #8b0000 100%);
+        background: -o-linear-gradient(left, #8b0000 0%, #c00d0d 50%, #8b0000 100%);
+    }
+
+    #junction1 {
+        height: 40px;
+        background-color: #5e0000;
+        opacity: 0.3;
+        margin-top: 50px;
+        margin-bottom: 262px;
+
+        border-top: 2px solid #330000;
+        border-bottom: 2px solid #330000;
+    }
+
+    #junction2 {
+        height: 40px;
+        background-color: #5e0000;
+        opacity: 0.3;
+
+        border-top: 2px solid #330000;
+        border-bottom: 2px solid #330000;
+    }
+
+    .screen {
+        height: 245px;
+        width: 260px;
+        padding: 0 20px;
+        background-color: #b0b0b0;
+        float:left;
+
+        position: absolute;
+        top: 130px;
+        left: 19px;
+
+        border-radius: 15px;
+        -webkit-border-radius: 15px;
+        -moz-border-radius: 15px;
+        -o-border-radius: 15px;
+    }
+
+    .screen:after {
+        content: "";
+        border-top: 40px solid #b0b0b0;
+        border-left: 40px solid #c00d0d;
+        height: 0;
+
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+
+    #picture {
+        height: 175px;
+        width: 254px;
+        margin-top: 20px;
+        margin-bottom: 9px;
+        background-color: #fff;
+        border: 3px solid #494949;
+        clear: both;
+
+        border-radius: 15px;
+        -webkit-border-radius: 15px;
+        -moz-border-radius: 15px;
+        -o-border-radius: 15px;
+    }
+
+    #picture img {
+        display: block;
+        margin: 0 auto;
+    }
+
+    #topPicture {
+        margin: 6px auto;
+        width: 40px;
+    }
+
+    #buttontopPicture1, #buttontopPicture2 {
+        height: 8px;
+        width: 8px;
+        background-color: #c00d0d;
+        border: 1px solid #000;
+        float: left;
+
+        border-radius: 15px;
+        -webkit-border-radius: 15px;
+        -moz-border-radius: 15px;
+        -o-border-radius: 15px;
+    }
+
+    #buttontopPicture1 {
+        margin-right: 20px;
+    }
+
+    #js--pokeID {
+        height: 26px;
+        width:fit-content;
+        background-color: #30da0c;
+        margin-left: 35px;
+        padding: 1px 2px;
+        float: left;
+        text-align: center;
+        font-size: 22px;
+    }
+
+    #speakers {
+        float: right;
+        width: 75px;
+        height: 25px;
+        margin-right: 20px;
+    }
+
+    .sp {
+        height: 3px;
+        margin-bottom: 5px;
+        background-color: #494949;
+
+        border-radius: 30px;
+        -webkit-border-radius: 30px;
+        -moz-border-radius: 30px;
+        -o-border-radius: 30px;
+    }
+
+    .randomPokemon:hover,
+    .js--pokeSprite:hover,
+    #js--searchButton:hover,
+    #js--helpButton:hover,
+    #powerButton:hover {
+        cursor: pointer;
+    }
+
+    .randomPokemon {
+        height: 50px;
+        width: 50px;
+        background-color: #000;
+
+        position: absolute;
+        top: 395px;
+        left: 30px;
+
+        border-radius: 100px;
+        -webkit-border-radius: 100px;
+        -moz-border-radius: 100px;
+        -o-border-radius: 100px;
+
+        background: linear-gradient(top, #307bfb 0%, #0530e5 80%);
+        background: -webkit-linear-gradient(top, #307bfb 0%, #0530e5 80%);
+        background: -moz-linear-gradient(top, #307bfb 0%, #0530e5 80%);
+        background: -o-linear-gradient(top, #307bfb 0%, #0530e5 80%);
+
+        box-shadow: -3px 2px #001c91;
+        -webkit-box-shadow: -3px 2px #001c91;
+        -moz-box-shadow: -3px 2px #001c91;
+        -o-box-shadow: -3px 2px #001c91;
+    }
+
+    #random {
+        height: 40px;
+        width: 40px;
+        position: absolute;
+        top:5px;
+        left: 4px;
+    }
+
+    .barbutton1 {
+        height: 13px;
+        width: 50px;
+
+        position: absolute;
+        top: 405px;
+        left: 100px;
+
+        border-radius: 100px;
+        -webkit-border-radius: 100px;
+        -moz-border-radius: 100px;
+        -o-border-radius: 100px;
+
+        background: linear-gradient(top, #50fb05 0%, #057b05 100%);
+        background: -webkit-linear-gradient(top, #50fb05 0%, #057b05 100%);
+        background: -moz-linear-gradient(top, #50fb05 0%, #057b05 100%);
+        background: -o-linear-gradient(top, #50fb05 0%, #057b05 100%);
+
+        box-shadow: -1px 2px #004200;
+        -webkit-box-shadow: -1px 2px #004200;
+        -moz-box-shadow: -1px 2px #004200;
+        -o-box-shadow: -1px 2px #004200;
+    }
+
+    #playbutton {
+        height: 10px;
+        width: 10px;
+        position: absolute;
+        top: 2px;
+        left: 20px;
+    }
+
+    .barbutton2 {
+        height: 13px;
+        width: 50px;
+
+        position: absolute;
+        top: 405px;
+        left: 165px;
+
+        border-radius: 100px;
+        -webkit-border-radius: 100px;
+        -moz-border-radius: 100px;
+        -o-border-radius: 100px;
+
+        background: linear-gradient(top, #fb6505 0%, #bb0505 100%);
+        background: -webkit-linear-gradient(top, #fb6505 0%, #bb0505 100%);
+        background: -moz-linear-gradient(top, #fb6505 0%, #bb0505 100%);
+        background: -o-linear-gradient(top, #fb6505 0%, #bb0505 100%);
+
+        box-shadow: -1px 2px #7b0000;
+        -webkit-box-shadow: -1px 2px #7b0000;
+        -moz-box-shadow: -1px 2px #7b0000;
+        -o-box-shadow: -1px 2px #7b0000;
+    }
+
+    .cross {
+        width: 90px;
+        height: 90px;
+
+        position: absolute;
+        top: 394px;
+        left: 230px;
+    }
+
+    #topcross {
+        width: 30px;
+        height: 30px;
+        background-color: #222;
+
+        position: absolute;
+        top: 0;
+        left: 30px;
+
+        box-shadow: -3px 2px #010101;
+        -webkit-box-shadow: -3px 2px #010101;
+        -moz-box-shadow: -3px 2px #010101;
+        -o-box-shadow: -3px 2px #010101;
+
+        border-top-left-radius: 5px;
+        -webkit-border-top-left-radius: 5px;
+        -moz-border-top-left-radius: 5px;
+        -o-border-top-left-radius: 5px;
+
+        border-top-right-radius: 5px;
+        -webkit-border-top-right-radius: 5px;
+        -moz-border-top-right-radius: 5px;
+        -o-border-top-right-radius: 5px;
+    }
+
+    #leftcross {
+        width: 30px;
+        height: 30px;
+        background-color: #222;
+        z-index: 1;
+
+        position: absolute;
+        left: 0;
+        top: 30px;
+
+        box-shadow: -3px 2px #010101;
+        -webkit-box-shadow: -3px 2px #010101;
+        -moz-box-shadow: -3px 2px #010101;
+        -o-box-shadow: -3px 2px #010101;
+
+        border-top-left-radius: 5px;
+        -webkit-border-top-left-radius: 5px;
+        -moz-border-top-left-radius: 5px;
+        -o-border-top-left-radius: 5px;
+
+        border-bottom-left-radius: 5px;
+        -webkit-border-bottom-left-radius: 5px;
+        -moz-border-bottom-left-radius: 5px;
+        -o-border-bottom-left-radius: 5px;
+    }
+
+    #midcross {
+        width: 30px;
+        height: 30px;
+        background-color: #222;
+
+        position: absolute;
+        top: 30px;
+        left: 30px;
+
+        box-shadow: -3px 2px #010101;
+        -webkit-box-shadow: -3px 2px #010101;
+        -moz-box-shadow: -3px 2px #010101;
+        -o-box-shadow: -3px 2px #010101;
+    }
+
+    #rightcross {
+        width: 30px;
+        height: 30px;
+        background-color: #222;
+
+        position: absolute;
+        top: 30px;
+        right: 0;
+
+        box-shadow: -3px 2px #010101;
+        -webkit-box-shadow: -3px 2px #010101;
+        -moz-box-shadow: -3px 2px #010101;
+        -o-box-shadow: -3px 2px #010101;
+
+        border-top-right-radius: 5px;
+        -webkit-border-top-right-radius: 5px;
+        -moz-border-top-right-radius: 5px;
+        -o-border-top-right-radius: 5px;
+
+        border-bottom-right-radius: 5px;
+        -webkit-border-bottom-right-radius: 5px;
+        -moz-border-bottom-right-radius: 5px;
+        -o-border-bottom-right-radius: 5px;
+    }
+
+    #botcross {
+        width: 30px;
+        height: 30px;
+        background-color: #222;
+
+        position: absolute;
+        bottom: 0;
+        left: 30px;
+
+        box-shadow: -3px 2px #010101;
+        -webkit-box-shadow: -3px 2px #010101;
+        -moz-box-shadow: -3px 2px #010101;
+        -o-box-shadow: -3px 2px #010101;
+
+        border-bottom-left-radius: 5px;
+        -webkit-border-bottom-left-radius: 5px;
+        -moz-border-bottom-left-radius: 5px;
+        -o-border-bottom-left-radius: 5px;
+
+        border-bottom-right-radius: 5px;
+        -webkit-border-bottom-right-radius: 5px;
+        -moz-border-bottom-right-radius: 5px;
+        -o-border-bottom-right-radius: 5px;
+    }
+
+    #upT {
+        width: 0;
+        height: 0;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-bottom: 10px solid #111;
+
+        position: absolute;
+        top: 5px;
+        left: 4px;
+    }
+
+    #downT {
+        width: 0;
+        height: 0;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-top: 10px solid #111;
+
+        position: absolute;
+        bottom: 5px;
+        left: 4px;
+    }
+
+    #leftT {
+        width: 0;
+        height: 0;
+        border-top: 10px solid transparent;
+        border-right: 10px solid #111;
+        border-bottom: 10px solid transparent;
+
+        position: absolute;
+        top: 5px;
+        left: 4px;
+    }
+
+    #rightT {
+        width: 0;
+        height: 0;
+        border-top: 10px solid transparent;
+        border-left: 10px solid #111;
+        border-bottom: 10px solid transparent;
+
+        position: absolute;
+        top: 5px;
+        right: 5px;
+    }
+
+    #midCircle {
+        width: 20px;
+        height: 20px;
+
+        position: absolute;
+        top: 5px;
+        left: 4px;
+
+        border-radius: 30px;
+        -webkit-border-radius: 30px;
+        -moz-border-radius: 30px;
+        -o-border-radius: 30px;
+
+        background: radial-gradient(#111, #222);
+        background: -webkit-radial-gradient(#111, #222);
+        background: -moz-radial-gradient(#111, #222);
+        background: -o-radial-gradient(#111, #222);
+    }
+
+/*----------*/
+/*RIGHT FLAP*/
+/*----------*/
+
+    #curve1_right {
+        width: 166px;
+        height: 451px;
+        background-color: #c00d0d;
+        float: right;
+
+        position: absolute;
+        bottom: 0;
+        left: 0;
+
+        border-top-right-radius:85px 60px;
+        -webkit-border-right-left-radius: 85px 60px;
+        -moz-border-right-left-radius: 85px 60px;
+        -o-border-right-left-radius: 85px 60px;
+    }
+
+    #bg_curve1_right {
+        width: 350px;
+        height: 80px;
+        background-color: transparent;
+
+        border-top-right-radius: 30px;
+        -webkit-border-top-right-radius: 30px;
+        -moz-border-top-right-radius: 30px;
+        -o-border-top-right-radius: 30px;
+    }
+
+    #curve2_right {
+        width: 216px;
+        height: 100px;
+        background-color: transparent;
+        float: left;
+
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        border-bottom-left-radius: 85px 60px;
+        -webkit-border-bottom-left-radius: 85px 60px;
+        -moz-border-bottom-left-radius: 85px 60px;
+        -o-border-bottom-left-radius: 85px 60px;
+    }
+
+    #bg_curve2_right {
+        width: 350px;
+        height: 400px;
+        background-color: #c00d0d;
+
+        position: absolute;
+        bottom: 0;
+        right: 0;
+
+        border-bottom-right-radius: 30px;
+        -webkit-border-bottom-right-radius: 30px;
+        -moz-border-bottom-right-radius: 30px;
+        -o-border-bottom-right-radius: 30px;
+
+        border-top-right-radius: 30px;
+        -webkit-border-top-right-radius: 30px;
+        -moz-border-top-right-radius: 30px;
+        -o-border-top-right-radius: 30px;
+
+        box-shadow: -10px 9px #5e0000;
+        -webkit-box-shadow: -10px 9px #5e0000;
+        -moz-box-shadow: -10px 9px #5e0000;
+        -o-box-shadow: -10px 9px #5e0000;
+    }
+
+/*----------------------*/
+/*ELEMENTS ON RIGHT FLAP*/
+/*----------------------*/
+
+    #stats {
+        height: 130px;
+        width: 280px;
+        padding: 10px;
+        background-color: #30da0c;
+        z-index: 1;
+        font-size: 13px;
+        color: #003300;
+
+        position: absolute;
+        top: 130px;
+        left: 25px;
+
+        border-radius: 15px;
+        -webkit-border-radius: 15px;
+        -moz-border-radius: 15px;
+        -o-border-radius: 15px;
+
+        box-shadow: 0 0 20px #003300 inset;
+        -webkit-box-shadow: 0 0 20px #003300 inset;
+        -moz-box-shadow: 0 0 20px #003300 inset;
+        -o-box-shadow: 0 0 20px #003300 inset;
+    }
+
+    #base-stats {
+        width: 100%;
+        height: 70%;
+    }
+
+    #stats-left {
+        width: 50%;
+        float: left;
+        margin-left: 0;
+    }
+
+    #stats-right {
+        width: 50%;
+        float: right;
+        margin-left: 0;
+        text-align: right;
+    }
+
+    #stats-right p {
+        float: left;
+    }
+
+    #stats-right span {
+        float: right;
+    }
+
+    #flavorText:before {
+        display: block;
+        height: 2px;
+        background-color: #003300;
+        content: " ";
+        width: 100px;
+        margin: 0 auto 10px;
+    }
+
+    #flavorText
+    {
+        width: 100%;
+        float: left;
+        overflow-style: marquee-line;
+
+    }
+
+    #evolutions {
+        z-index: 1;
+        position: absolute;
+        top: 295px;
+        left: 25px;
+    }
+
+    .evolution {
+        height: 45px;
+        width : 45px;
+        float: left;
+        margin-right: 7px;
+
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        -o-border-radius: 10px;
+
+        box-shadow: -1px 2px #001c91;
+        -webkit-box-shadow: -1px 2px #001c91;
+        -moz-box-shadow: -1px 2px #001c91;
+        -o-box-shadow: -1px 2px #001c91;
+    }
+
+    .evolutionOn {
+        background: linear-gradient(top, #307bfb 0%, #0530e5 80%);
+        background: -webkit-linear-gradient(top, #307bfb 0%, #0530e5 80%);
+        background: -moz-linear-gradient(top, #307bfb 0%, #0530e5 80%);
+        background: -o-linear-gradient(top, #307bfb 0%, #0530e5 80%);
+    }
+
+    .evolutionOff {
+        background: linear-gradient(top, #232525 0%, #072b46 80%);
+        background: -webkit-linear-gradient(top, #232525 0%, #072b46 80%);
+        background: -moz-linear-gradient(top, #232525 0%, #072b46 80%);
+        background: -o-linear-gradient(top, #232525 0%, #072b46 80%);
+    }
+
+    .js--pokeSprite {
+        width: 41px;
+        height: 41px;
+        z-index: 10;
+        margin: 2px 2px;
+    }
+
+/* Tooltip container */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    /* Position the tooltip text */
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+
+    /* Fade in tooltip */
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+/* Tooltip arrow */
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+    #search {
+        z-index: 1;
+        position: absolute;
+        top: 350px;
+        left: 40px;
+    }
+
+    #js--search {
+        width: 270px;
+        height: 25px;
+        font-size: 22px;
+        border-radius: 10px;
+        background-color: #30da0c;
+        color: #003300;
+        text-align: center;
+
+        box-shadow: 0 0 10px #003300 inset;
+        -webkit-box-shadow: 0 0 10px #003300 inset;
+        -moz-box-shadow: 0 0 10px #003300 inset;
+        -o-box-shadow: 0 0 10px #003300 inset;
+    }
+
+    #barbutton3 {
+        height: 13px;
+        width: 50px;
+        z-index: 1;
+
+        position: absolute;
+        top: 388px;
+        left: 210px;
+
+        border-radius: 100px;
+        -webkit-border-radius: 100px;
+        -moz-border-radius: 100px;
+        -o-border-radius: 100px;
+
+        background: linear-gradient(top, #50fb05 0%, #057b05 100%);
+        background: -webkit-linear-gradient(top, #50fb05 0%, #057b05 100%);
+        background: -moz-linear-gradient(top, #50fb05 0%, #057b05 100%);
+        background: -o-linear-gradient(top, #50fb05 0%, #057b05 100%);
+
+        box-shadow: -1px 2px #004200;
+        -webkit-box-shadow: -1px 2px #004200;
+        -moz-box-shadow: -1px 2px #004200;
+        -o-box-shadow: -1px 2px #004200;
+    }
+
+    #barbutton4 {
+        height: 13px;
+        width: 50px;
+        z-index: 1;
+
+        position: absolute;
+        top: 388px;
+        left: 270px;
+
+        border-radius: 100px;
+        -webkit-border-radius: 100px;
+        -moz-border-radius: 100px;
+        -o-border-radius: 100px;
+
+        background: linear-gradient(top, #fb6505 0%, #bb0505 100%);
+        background: -webkit-linear-gradient(top, #fb6505 0%, #bb0505 100%);
+        background: -moz-linear-gradient(top, #fb6505 0%, #bb0505 100%);
+        background: -o-linear-gradient(top, #fb6505 0%, #bb0505 100%);
+
+        box-shadow: -1px 2px #7b0000;
+        -webkit-box-shadow: -1px 2px #7b0000;
+        -moz-box-shadow: -1px 2px #7b0000;
+        -o-box-shadow: -1px 2px #7b0000;
+    }
+
+    #minipowerButton4 {
+        width: 15px;
+        height: 15px;
+        float: left;
+        z-index: 1;
+
+        position: absolute;
+        top: 388px;
+        left: 25px;
+
+        box-shadow: 0 0 10px #490000;
+        -webkit-box-shadow: 0 0 10px #490000;
+        -moz-box-shadow: 0 0 10px #490000;
+        -o-box-shadow: 0 0 10px #490000;
+
+        border-radius: 20px;
+        -webkit-border-radius: 20px;
+        -moz-border-radius: 20px;
+        -o-border-radius: 20px;
+
+        background: radial-gradient(#ff9b5b, #fb6505);
+        background: -webkit-radial-gradient(#ff9b5b, #fb6505);
+        background: -moz-radial-gradient(#ff9b5b, #fb6505);
+        background: -o-radial-gradient(#ff9b5b, #fb6505);
+    }
+
+    #minipowerButton5 {
+        width: 15px;
+        height: 15px;
+        float: left;
+        z-index: 1;
+
+        position: absolute;
+        top: 388px;
+        left: 51px;
+
+        box-shadow: 0 0 10px #490000;
+        -webkit-box-shadow: 0 0 10px #490000;
+        -moz-box-shadow: 0 0 10px #490000;
+        -o-box-shadow: 0 0 10px #490000;
+
+        border-radius: 20px;
+        -webkit-border-radius: 20px;
+        -moz-border-radius: 20px;
+        -o-border-radius: 20px;
+
+        background: radial-gradient(#0abd0a, #057b05);
+        background: -webkit-radial-gradient(#0abd0a, #057b05);
+        background: -moz-radial-gradient(#0abd0a, #057b05);
+        background: -o-radial-gradient(#0abd0a, #057b05);
+    }
+
+
+
+    #js--searchButton {
+        width: 140px;
+        height: 70px;
+        z-index: 1;
+        background-color: #ffff00;
+
+        position: absolute;
+        top: 415px;
+        left: 25px;
+
+        border-radius: 15px;
+        -webkit-border-radius: 15px;
+        -moz-border-radius: 15px;
+        -o-border-radius: 15px;
+
+        box-shadow: 0 0 20px #ff6600 inset;
+        -webkit-box-shadow: 0 0 20px #ff6600 inset;
+        -moz-box-shadow: 0 0 20px #ff6600 inset;
+        -o-box-shadow: 0 0 20px #ff6600 inset;
+    }
+
+    #js--helpButton {
+        width: 140px;
+        height: 70px;
+        z-index: 1;
+        background-color: #ffff00;
+
+        position: absolute;
+        top: 415px;
+        left: 185px;
+
+        border-radius: 15px;
+        -webkit-border-radius: 15px;
+        -moz-border-radius: 15px;
+        -o-border-radius: 15px;
+
+        box-shadow: 0 0 20px #ff6600 inset;
+        -webkit-box-shadow: 0 0 20px #ff6600 inset;
+        -moz-box-shadow: 0 0 20px #ff6600 inset;
+        -o-box-shadow: 0 0 20px #ff6600 inset;
+    }
+
+    .button-image {
+        width: 50px;
+        height: auto;
+        position: absolute;
+        top: 10px;
+        left: 45px;
+        z-index: 5;
+    }
+
+
+
+
+@media handheld and (orientation:portrait), (max-width:768px) {
+
+    .pokedex
+    {
+        width: 400px;
+    }
+
+    .logo
+    {
+        width: 281px;
+        height: 99px;
+        background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/200653/logo.png') no-repeat left top;
+        z-index: 1;
+
+        position: absolute;
+        top: 220px;
+        left: 30px;
+    }
+
+    .left
+    {
+        width: 400px;
+        height: 500px;
+        float: left;
+        position: relative;
+        z-index: 1;
+        margin: 0 auto;
+    }
+
+    .curve1_left
+    {
+        width: 201px;
+        height: 85px;
+        background-color: #8b0000;
+        float: left;
+        padding: 15px 0 0 15px;
+
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        box-shadow: 0 0 #5e0000;
+        -webkit-box-shadow: 0 0 #5e0000;
+        -moz-box-shadow: 0 0 #5e0000;
+        -o-box-shadow: 0 0 #5e0000;
+
+        border-bottom-right-radius: 85px 60px;
+        -webkit-border-bottom-right-radius: 85px 60px;
+        -moz-border-bottom-right-radius: 85px 60px;
+        -o-border-bottom-right-radius: 85px 60px;
+
+        border-top-left-radius: 30px;
+        -webkit-border-top-left-radius: 30px;
+        -moz-border-top-left-radius: 30px;
+        -o-border-top-left-radius: 30px;
+    }
+
+    .bg_curve1_left
+    {
+        width: 400px;
+        height: 80px;
+        background-color: #8b0000;
+
+        box-shadow: -10px 9px #5e0000;
+        -webkit-box-shadow: -10px 9px #5e0000;
+        -moz-box-shadow: -10px 9px #5e0000;
+        -o-box-shadow: -10px 9px #5e0000;
+
+        border-top-left-radius: 30px;
+        -webkit-border-top-left-radius: 30px;
+        -moz-border-top-left-radius: 30px;
+        -o-border-top-left-radius: 30px;
+    }
+
+    .right, .screen, .randomPokemon, .barbutton1, .barbutton2, .cross
+    {
+        display: none;
+    }
+
+}
+
+
+
+/*----------*/
+/*POWER OFF*/
+/*---------*/
+
+.pokedexOff
+{
+    width: 400px;
+}
+
+.logoOff
+{
+    width: 281px;
+    height: 99px;
+    background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/200653/logo.png') no-repeat left top;
+    z-index: 1;
+
+    position: absolute;
+    top: 220px;
+    left: 30px;
+}
+
+.leftOff
+{
+    width: 400px;
+    height: 500px;
+    float: left;
+    position: relative;
+    z-index: 1;
+    margin: 0 auto;
+}
+
+.curve1_leftOff
+{
+    width: 201px;
+    height: 85px;
+    background-color: #8b0000;
+    float: left;
+    padding: 15px 0 0 15px;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    box-shadow: 0 0 #5e0000;
+    -webkit-box-shadow: 0 0 #5e0000;
+    -moz-box-shadow: 0 0 #5e0000;
+    -o-box-shadow: 0 0 #5e0000;
+
+    border-bottom-right-radius: 85px 60px;
+    -webkit-border-bottom-right-radius: 85px 60px;
+    -moz-border-bottom-right-radius: 85px 60px;
+    -o-border-bottom-right-radius: 85px 60px;
+
+    border-top-left-radius: 30px;
+    -webkit-border-top-left-radius: 30px;
+    -moz-border-top-left-radius: 30px;
+    -o-border-top-left-radius: 30px;
+}
+
+.bg_curve1_leftOff
+{
+    width: 400px;
+    height: 80px;
+    background-color: #8b0000;
+
+    box-shadow: -10px 9px #5e0000;
+    -webkit-box-shadow: -10px 9px #5e0000;
+    -moz-box-shadow: -10px 9px #5e0000;
+    -o-box-shadow: -10px 9px #5e0000;
+
+    border-top-left-radius: 30px;
+    -webkit-border-top-left-radius: 30px;
+    -moz-border-top-left-radius: 30px;
+    -o-border-top-left-radius: 30px;
+}
+
+.rightOff, .screenOff, .randomPokemonOff, .barbutton1Off, .barbutton2Off, .crossOff
+{
+    display: none;
+}
